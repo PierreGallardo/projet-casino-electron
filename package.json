@@ -1,0 +1,23 @@
+{
+  "name": "mon-projet-electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./src/output.css",
+    "watch:css": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
+    "start": "electron .",
+    "dev": "concurrently \"npm run watch:css\" \"npm run start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "electron": "^33.0.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {
+    "mysql2": "^3.15.3"
+  }
+}

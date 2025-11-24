@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # --- Service 1 : MySQL ---
+  mon-mysql:
+    image: mysql:8.0 # On fixe une version pour éviter les surprises
+    container_name: conteneur_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Mot de passe root
+      MYSQL_DATABASE: bdd_casino # Crée cette BDD au démarrage
+      MYSQL_USER: user_js       # Crée un utilisateur secondaire (optionnel)
+      MYSQL_PASSWORD: password_js # Mot de passe de l'utilisateur secondaire
+    ports:
+      - "3306:3306" # Permet d'accéder à MySQL depuis ton PC (Node.js local)
+    volumes:
+      - ./data_mysql:/var/lib/mysql # IMPORTANT : Pour sauvegarder les données sur ton disque si tu coupes docker
+
+  # --- Service 2 : phpMyAdmin ---
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: conteneur_pma
+    restart: always
+    environment:
+      PMA_HOST: mon-mysql # 👈 DOIT correspondre au nom du service MySQL ci-dessus
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80" # phpMyAdmin sera accessible sur le port 8080 de ton navigateur
+    depends_on:
+      - mon-mysql # Attend que MySQL soit lancé
