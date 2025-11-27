@@ -33,11 +33,6 @@ Suivez ces étapes pour installer le projet localement :
 npm install
 ```
 
-3. **Cloner le projet**
-   ```bash
-   git clone https://github.com/PierreGallardo/projet-casino-electron.git
-   cd projet-casino-electron
-    ```
 ## Utilisation
 
 ```powershell
